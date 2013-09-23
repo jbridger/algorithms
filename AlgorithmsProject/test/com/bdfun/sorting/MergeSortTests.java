@@ -27,8 +27,10 @@ public class MergeSortTests {
 	@Test
 	public void worstCaseSort()
 	{
-		int[] input = {6, 5, 4, 3, 2, 1};
-		int[] expected = {1, 2, 3, 4, 5, 6};
+//		int[] input = {6, 5, 4, 3, 2, 1};
+//		int[] expected = {1, 2, 3, 4, 5, 6};
+		int[] input = {2, 1};
+		int[] expected = {1, 2};
 
 		assertArrayEquals(expected, new MergeSort().sort(input));
 	}
