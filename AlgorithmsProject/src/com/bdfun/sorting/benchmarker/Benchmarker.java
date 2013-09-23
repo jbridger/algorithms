@@ -83,7 +83,7 @@ public class Benchmarker {
 			// Get start time
 			Date start = new Date();
 
-			// Run sort
+			// Run sort on copy of data
 			sorter.sort(Arrays.copyOf(data, data.length));
 
 			// Get end time
@@ -134,7 +134,7 @@ public class Benchmarker {
 
 	public static void main(String[] args) {
 		// Get random data to sort
-		int[] data = getRandomRange(50000);
+		int[] data = getRandomRange(100000);
 
 		// Build list of sorters to benchmark
 		List<Sorter> sorters = new ArrayList<Sorter>();
