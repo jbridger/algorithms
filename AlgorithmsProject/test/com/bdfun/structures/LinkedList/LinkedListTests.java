@@ -1,8 +1,8 @@
 package com.bdfun.structures.LinkedList;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -181,8 +181,8 @@ public class LinkedListTests
 		// Result of deletion should be true
 		assertTrue(list.deleteFirst(2));
 		
-		// Check list size is only one less than before
-		assertEquals(testIntegers.size() - 1, list.getSize());
+		// Check list is as expected
+		assertTrue(list.equalsList(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
 	}
 	
 	/**
@@ -200,15 +200,8 @@ public class LinkedListTests
 		// Result of deletion should be true
 		assertTrue(list.deleteFirst(1));
 		
-		// Check list size is only one less than before
-		assertEquals(testIntegers.size() - 1, list.getSize());
-		
-		// Loop through test integers and pop them off to ensure the list as expected
-		for(int i = 1; i < testIntegers.size(); i++)
-		{
-			// Pop element off list
-			assertEquals(testIntegers.get(i), list.pop());
-		}
+		// Check list is as expected
+		assertTrue(list.equalsList(Arrays.asList(2, 3, 4, 5, 6, 7)));
 	}
 	
 	/**
@@ -226,14 +219,83 @@ public class LinkedListTests
 		// Result of deletion should be true
 		assertTrue(list.deleteFirst(7));
 
-		// Check list size is only one less than before
-		assertEquals(testIntegers.size() - 1, list.getSize());
+		// Check list is as expected
+		assertTrue(list.equalsList(Arrays.asList(1, 2, 3, 4, 5, 6)));
+	}
+	
+	/**
+	 * Tests counting the number of occurrences of the specified value.
+	 */
+	@Test
+	public void count()
+	{
+		// Integers to initialise linked list from. Note a duplicate value in list.
+		List<Integer> testIntegers = Arrays.asList(1, 2, 2, 3, 4, 5, 6, 7);
+		
+		// Initialise linked list from above integers
+		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		
+		// Look for non-existent number
+		assertEquals(0, list.count(20));
+		
+		// Look for number that only occurs once
+		assertEquals(1, list.count(4));
+		
+		// Look for number that occurs twice
+		assertEquals(2, list.count(2));
+	}
+	
+	/**
+	 * Tests comparing a java.util.List with the LinkedList. The order of the elements is important.
+	 */
+	@Test
+	public void listEquals()
+	{
+		// Integers to initialise linked list from.
+		List<Integer> testIntegers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+		
+		// Initialise linked list from above integers
+		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		
+		// Lists of integers that will not match
+		List<Integer> empty = Arrays.asList();
+		List<Integer> differentFirst = Arrays.asList(2, 2, 3, 4, 5, 6, 7);
+		List<Integer> differentLast = Arrays.asList(1, 2, 3, 4, 5, 6, 8);
+		List<Integer> justDifferent = Arrays.asList(1, 3, 5, 4, 8, 6, 8);
+		
+		// Check it matches the list we initialised from
+		assertTrue(list.equalsList(testIntegers));
+		
+		// Test against lists that will not match
+		assertFalse(list.equalsList(empty));
+		assertFalse(list.equalsList(differentFirst));
+		assertFalse(list.equalsList(differentLast));
+		assertFalse(list.equalsList(justDifferent));
+	}
+	
+	/**
+	 * Tests comparing a java.util.List with the LinkedList. The order of the elements is important.
+	 * 
+	 * Linked list starts empty.
+	 */
+	@Test
+	public void listEqualsEmptyList()
+	{	
+		// Lists of integers that will not match
+		List<Integer> empty = Arrays.asList();
+		List<Integer> differentFirst = Arrays.asList(2, 2, 3, 4, 5, 6, 7);
+		List<Integer> differentLast = Arrays.asList(1, 2, 3, 4, 5, 6, 8);
+		List<Integer> justDifferent = Arrays.asList(1, 3, 5, 4, 8, 6, 8);
 
-		// Loop through test integers and pop them off to ensure the list as expected
-		for(int i = 0; i < testIntegers.size() - 1; i++)
-		{
-			// Pop element off list
-			assertEquals(testIntegers.get(i), list.pop());
-		}
+		// Test comparing an empty linked list
+		LinkedList<Integer> emptyList = new LinkedList<Integer>();
+		
+		// Empty linked list should match empty list
+		assertTrue(emptyList.equalsList(empty));
+		
+		// Empty linked list should not match anything else
+		assertFalse(emptyList.equalsList(differentFirst));
+		assertFalse(emptyList.equalsList(differentLast));
+		assertFalse(emptyList.equalsList(justDifferent));
 	}
 }
