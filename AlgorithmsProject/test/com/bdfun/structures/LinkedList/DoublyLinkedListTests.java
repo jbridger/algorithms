@@ -11,21 +11,21 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * Tests for the LinkedList class.
+ * Tests for the DoublyLinkedList class.
  */
-public class LinkedListTests 
+public class DoublyLinkedListTests 
 {
 	/**
 	 * Tests the blank constructor.
 	 */
 	public void blankConstructor()
 	{
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>();
 		
 		// Assert list is empty
 		assertTrue(list.isEmpty());
 		assertEquals(0, list.getSize());
-		assertNull(list.pop());
+		assertNull(list.remove());
 	}
 	
 	/**
@@ -38,13 +38,13 @@ public class LinkedListTests
 		List<Integer> testIntegers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 		
 		// Create linked list with the list above
-		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>(testIntegers);
 		
 		// The list should be in the order of the supplied list
 		for(int i = 0; i < testIntegers.size(); i++)
 		{
 			// Pop element off list
-			assertEquals(testIntegers.get(i), list.pop());
+			assertEquals(testIntegers.get(i), list.remove());
 		}
 	}
 	
@@ -54,7 +54,7 @@ public class LinkedListTests
 	@Test
 	public void emptyList()
 	{
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>();
 		
 		// Assert list is empty
 		assertTrue(list.isEmpty());
@@ -66,7 +66,7 @@ public class LinkedListTests
 	@Test
 	public void pushAndPop()
 	{
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>();
 		
 		// Create and push item on to list
 		list.push(5);
@@ -76,7 +76,7 @@ public class LinkedListTests
 		assertEquals(1, list.getSize());
 		
 		// Pop item
-		Integer poppedItem = list.pop();
+		Integer poppedItem = list.remove();
 		
 		// Check that the popped item is the same item
 		assertEquals(Integer.valueOf(5), poppedItem);
@@ -96,7 +96,7 @@ public class LinkedListTests
 		List<Integer> testIntegers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 		
 		// Create linked list
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>();
 		
 		// Loop through test integers and add all of them to the list.
 		for(int i = 0; i < testIntegers.size(); i++)
@@ -115,7 +115,7 @@ public class LinkedListTests
 		for(int i = 0; i < testIntegers.size(); i++)
 		{
 			// Pop element off list
-			assertEquals(testIntegers.get(i), list.pop());
+			assertEquals(testIntegers.get(i), list.remove());
 			
 			// Check size
 			assertEquals(testIntegers.size() - (i+1), list.getSize());
@@ -133,7 +133,7 @@ public class LinkedListTests
 	@Test
 	public void deleteFirstOnEmptyList()
 	{
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>();
 		
 		// Result of deletion should be false
 		assertFalse(list.deleteFirst(5));
@@ -147,7 +147,7 @@ public class LinkedListTests
 	@Test
 	public void deleteFirstOnOneItemList()
 	{
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>();
 		list.push(5);
 		
 		// Result of deletion should be true
@@ -156,7 +156,7 @@ public class LinkedListTests
 		// List should be empty
 		assertTrue(list.isEmpty());
 		assertEquals(0, list.getSize());
-		assertNull(list.pop());
+		assertNull(list.remove());
 	}
 	
 	/**
@@ -171,7 +171,7 @@ public class LinkedListTests
 		List<Integer> testIntegers = Arrays.asList(1, 2, 2, 3, 4, 5, 6, 7);
 		
 		// Initialise linked list from above integers
-		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>(testIntegers);
 		
 		// Delete a non-existent value
 		assertFalse(list.deleteFirst(50));
@@ -195,7 +195,7 @@ public class LinkedListTests
 		List<Integer> testIntegers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 		
 		// Initialise linked list from above integers
-		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>(testIntegers);
 			
 		// Result of deletion should be true
 		assertTrue(list.deleteFirst(1));
@@ -214,7 +214,7 @@ public class LinkedListTests
 		List<Integer> testIntegers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
 		// Initialise linked list from above integers
-		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>(testIntegers);
 
 		// Result of deletion should be true
 		assertTrue(list.deleteFirst(7));
@@ -233,7 +233,7 @@ public class LinkedListTests
 		List<Integer> testIntegers = Arrays.asList(1, 2, 2, 3, 4, 5, 6, 7);
 		
 		// Initialise linked list from above integers
-		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>(testIntegers);
 		
 		// Look for non-existent number
 		assertEquals(0, list.count(20));
@@ -255,7 +255,7 @@ public class LinkedListTests
 		List<Integer> testIntegers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 		
 		// Initialise linked list from above integers
-		LinkedList<Integer> list = new LinkedList<Integer>(testIntegers);
+		LinkedList<Integer> list = new DoublyLinkedList<Integer>(testIntegers);
 		
 		// Lists of integers that will not match
 		List<Integer> empty = Arrays.asList();
@@ -288,7 +288,7 @@ public class LinkedListTests
 		List<Integer> justDifferent = Arrays.asList(1, 3, 5, 4, 8, 6, 8);
 
 		// Test comparing an empty linked list
-		LinkedList<Integer> emptyList = new LinkedList<Integer>();
+		LinkedList<Integer> emptyList = new DoublyLinkedList<Integer>();
 		
 		// Empty linked list should match empty list
 		assertTrue(emptyList.equalsList(empty));
